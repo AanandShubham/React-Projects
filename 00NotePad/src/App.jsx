@@ -7,6 +7,7 @@ import NotesCard from './components/NotesCard'
 
 function App() {
   const [notes, setNotes] = useState([])
+  const [btnName,setBtnName] = useState("read more")
   const titleRef = useRef(null)
   const notesRef = useRef(null
 
@@ -16,10 +17,40 @@ function App() {
    
     const title = titleRef.current.value;
     const note = notesRef.current.value;
-    setNotes([...notes,{title:title,note:note}])
+    setNotes([...notes,{title:title,note:note,show:false}])
 
     titleRef.current.value = notesRef.current.value = ""
   }
+  const deleteNote = (e) => {
+    // console.log(e.target.name)
+    let name = e.target.name
+    // console.log(name)
+    let newNotes = notes.filter((note)=> note.title !== name)
+    // console.log(notes)
+    setNotes(newNotes)
+    
+  }
+
+  const handleMore = (e) => {
+    let newNotes = notes.map((note)=>{
+      if(note.title === e.target.name)
+        note.show = !note.show 
+      return note
+    })
+
+    setNotes(newNotes)
+    
+    setBtnName((prev)=>{
+      if(prev === "read more")
+        return "hide"
+      else{
+        return "read more"
+      }
+    })
+
+  }
+  
+  
   return (
     <>
       <div className='w-full h-full pt-2 bg-neutral-700'>
@@ -30,13 +61,11 @@ function App() {
 
         {/* Notes Card Section  */}
 
-        {/* TODO : remove padding if you can */}
-
         <div className="w-fit h-fit mt-[1.5%] m-[2.5%]  flex justify-between flex-wrap  gap-2  bg-neutral-600 rounded-2xl">
 
           { 
             notes.map((note) => 
-                  <NotesCard title={note.title} note={note.note} />
+                  <NotesCard key={note.title} title={note.title}  btnName={btnName} note={note.note} show={note.show} handleMore={handleMore} deleteNote = {deleteNote} />
             )}
 
         </div>
