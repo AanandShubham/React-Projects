@@ -39,6 +39,8 @@ function App() {
     })
 
     setNotes(newNotes)
+
+    // solve the bug read and hide for every one 
     
     setBtnName((prev)=>{
       if(prev === "read more")
