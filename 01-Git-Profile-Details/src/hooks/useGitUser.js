@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
-function useGitUser(username){
-    const [gitUser,setGitUser] = useState({})
+function useGitUser(username) {
+    const [gitUser, setGitUser] = useState({})
 
-    useEffect(()=>{
+    useEffect(() => {
         fetch(`https://api.github.com/users/${username}`)
-        .then((res)=>res.json())
-        .then((res)=>setGitUser(res))
-    },[username])
+            .then((res) => res.json())
+            .then((res) => setGitUser(res))
+    }, [username])
 
     return gitUser;
 }
