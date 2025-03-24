@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import Home from './components/Home/Home'
 import Header from './components/Header/Header'
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
+import {Outlet} from 'react-router-dom'
 
 import Footer from './components/Footer/Footer'
 
@@ -14,10 +13,10 @@ function App() {
       <header className='w-full h-[12vh] '>
         <Header />
       </header>
-      <main className=''>
+      <main className='w-full h-fit'>
         <Outlet />
       </main>
-      <footer>
+      <footer className='w-full h-[8vh] flex justify-between items-center bg-amber-200'>
         <Footer />
       </footer>
     </>
