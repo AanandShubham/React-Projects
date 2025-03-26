@@ -2,6 +2,8 @@ import { NavLink, useNavigate } from "react-router-dom"
 export default function Header() {
     let userLoggedIn = false
     const navigate = useNavigate()
+
+    const detail = {name: "ram",age:34}
     return (
         <div className="w-full h-[12vmin] fixed  text-[#00bf8f] bg-gradient-to-r from-[#eb2d0c] to-[#06e619] flex justify-between p-1">
 
@@ -22,9 +24,11 @@ export default function Header() {
                             className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}>About</NavLink>
                     </li>
                     <li className="hover:text-red-500 cursor-pointer">
-                        <NavLink to="/contact"
+                        <NavLink to="/contact/ram"
                             className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}
                         >Contact</NavLink>
+
+                        {/* <button onClick={()=>navigate(`/contact/ram,sita,rita`)}>contact</button> */}
                     </li>
                    
                 </ul>

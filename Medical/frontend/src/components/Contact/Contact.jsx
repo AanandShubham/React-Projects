@@ -1,9 +1,16 @@
 import React from 'react'
+import { useLoaderData, useParams } from 'react-router-dom'
 
 const Contact = () => {
+  const data = useLoaderData();
+  const {id} = useParams();
+  // console.log(id)
+
   return (
     <div>
-      Contact
+      Contact : {id}
+      data : {data}
+      {/* Age : {age} */}
     </div>
   )
 }

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import {useNavigate} from 'react-router-dom'
 
 const SignOut = () => {
-
+    const navigate = useNavigate()
     const [seller, setSeller] = useState(false);
     const [passmatch, setPassmatch] = useState(true)
 
@@ -41,7 +42,7 @@ const SignOut = () => {
             
             // write fetch code for data registration
 
-            const response = await fetch("http://localhost/3000/register/",{
+            const response = await fetch("http://localhost:3000/register",{
                 method:"POST",
                 headers:{
                     "Content-Type" : "application/json"
@@ -51,14 +52,13 @@ const SignOut = () => {
             .then((res)=>res.json())
             .then((res)=>res)
 
-            console.log("Response From Db : ",response);
+            console.log("Response From Db : ", await response);
+            // console.log("Response From Db : ", await response.status);
 
         } else {
             setPassmatch(false);
             window.alert("Password and conform password does not match ! ")
         }
-
-        console.log(formData)
     }
 
 
@@ -69,7 +69,7 @@ const SignOut = () => {
                     onSubmit={handleSubmit}
                     className='w-full h-full bg-amber-50 flex p-8 justify-center items-center'
                     style={{ backgroundImage: "url(./src/images/space.jpg)" }}
-                    action="https://www.google.com/">
+                    action="">
 
 
                     <div className=' flex p-8 rounded-2x rounded-2xl text-black bg-[#cee1e395] flex-col justify-between gap-8'>
@@ -162,7 +162,9 @@ const SignOut = () => {
 
                         <div className='w-full flex justify-center gap-4 text-2xl'>
                             <input className='pl-2 pr-2 pt-1 pb-1 border-1 rounded-2xl' type="submit" value="Register" />
-                            <input className='pl-2 pr-2 pt-1 pb-1 border-1 rounded-2xl' type="button" value="Cancle" />
+                            <input 
+                            onClick={()=> navigate("/")}
+                            className='pl-2 pr-2 pt-1 pb-1 border-1 rounded-2xl' type="button" value="Cancle" />
                         </div>
                     </div>
                 </form>

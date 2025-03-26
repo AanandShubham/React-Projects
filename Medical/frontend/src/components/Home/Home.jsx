@@ -8,7 +8,8 @@ const Home = () => {
                 className="w-full h-[70vh] flex  p-2 gap-2 ">
                 <div className="w-1/2 h-full ">
                     <img
-                        className="mix-blend-color-burn hover:scale-105"
+                        className="mix-blend-color-burn hover:scale-105 "
+                        // style={{filter:"drop-shadow(1px 1px 20px yellow"}}
                         src="./src/images/doctor_anime.jpg" alt=""
                     />
                 </div>
