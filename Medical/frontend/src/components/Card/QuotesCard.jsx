@@ -3,7 +3,7 @@ import React from 'react'
 const QuotesCard = ({quotes,writer}) => {
     return (
         <div>
-            <div className="border-4 w-[300px] border-sky-200 h-[300px] flex flex-col  mt-4 justify-center gap-4 items-center p-3 hover:bg-blue-100 bg-blue-200  rounded-tl-4xl rounded-tr-4xl rounded-bl-2xl ">
+            <div className="border-2 w-[300px] shadow-2xl shadow-blue-300 border-sky-200 h-[300px] flex flex-col  mt-4 justify-center gap-4 items-center p-3 hover:bg-blue-100 bg-blue-200  rounded-tl-4xl rounded-tr-4xl rounded-bl-2xl ">
 
                 <div className='w-full font-bold ml-4'>
                    {quotes}

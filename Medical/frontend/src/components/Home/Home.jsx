@@ -15,7 +15,7 @@ const Home = () => {
                 </div>
                 <div className="w-fit h-full flex justify-evenly  flex-col items-center ">
 
-                    <p className="w-[500px] p-4 font-serif rounded-2xl text-2xl shadow-2xl shadow-amber-200"> "<b>Sleep</b>"  is the most important 'repair' machanism our body has, and getting enough of it will ensure you're feeling fit and energized the next day.</p>
+                    <p className="w-[500px] p-4 font-serif rounded-2xl text-2xl shadow-2xl shadow-green-200"> "<b>Sleep</b>"  is the most important 'repair' machanism our body has, and getting enough of it will ensure you're feeling fit and energized the next day.</p>
 
                     <h2 className="-mt-20 ml-40 text-2xl"><b>Unknown</b></h2>
                 </div>

@@ -5,7 +5,7 @@ export default function Header() {
 
     const detail = {name: "ram",age:34}
     return (
-        <div className="w-full h-[12vmin] fixed  text-[#00bf8f] bg-gradient-to-r from-[#eb2d0c] to-[#06e619] flex justify-between p-1">
+        <div className="w-full h-[12vmin] fixed  text-[#00bf8f] bg-gradient-to-r from-[#eb2d0cec] to-[#04d915ef] flex justify-between p-1">
 
             <div>
                 <img

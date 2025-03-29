@@ -67,12 +67,12 @@ const SignOut = () => {
             <div className='w-screen h-screen'>
                 <form
                     onSubmit={handleSubmit}
-                    className='w-full h-full bg-amber-50 flex p-8 justify-center items-center'
-                    style={{ backgroundImage: "url(./src/images/space.jpg)" }}
+                    className='w-full h-full bg-gradient-to-b from-[#fff] to-[#7cb64f] flex p-8 justify-center items-center'
+                    // style={{ backgroundImage: "url(./src/images/space.jpg)" }}
                     action="">
 
 
-                    <div className=' flex p-8 rounded-2x rounded-2xl text-black bg-[#cee1e395] flex-col justify-between gap-8'>
+                    <div className=' flex p-8 rounded-2x rounded-2xl shadow-2xl shadow-[#fff] text-black bg-[#95b69195] flex-col justify-between gap-8'>
                         <h1 className='text-center font-bold text-2xl'>Sign_Up Page</h1>
                         <div className='w-full flex gap-6'>
                             <input
@@ -149,7 +149,7 @@ const SignOut = () => {
                                 <select
                                     onChange={handleUserType}
                                     className='border-1 rounded-2xl p-4' name="usertype" id="">
-                                    <option value="Student">Student</option>
+                                    <option value="Patient">Patient</option>
                                     <option value="Seller">Seller</option>
                                 </select>
                             </div>
@@ -164,7 +164,7 @@ const SignOut = () => {
                             <input className='pl-2 pr-2 pt-1 pb-1 border-1 rounded-2xl' type="submit" value="Register" />
                             <input 
                             onClick={()=> navigate("/")}
-                            className='pl-2 pr-2 pt-1 pb-1 border-1 rounded-2xl' type="button" value="Cancle" />
+                            className='pl-2 pr-2 pt-1 pb-1 border-1 rounded-2xl' type="button" value="Cancel" />
                         </div>
                     </div>
                 </form>

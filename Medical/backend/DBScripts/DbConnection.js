@@ -8,17 +8,10 @@ const connection = await mysql.createConnection({
     database:"Medical"
 });
 
-// const data = await connection.query("show tables");
 
 console.log("Connection Created");
 
-// const connection = ()=>{
-//     console.log("connection is created");
-// }
-
-// const print = ()=>{
-//     console.log("This is print")
-// }
+// modules.exports = connection
 
 export {connection}
 
