@@ -1,9 +1,16 @@
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom"
-export default function Header() {
-    let userLoggedIn = false
-    const navigate = useNavigate()
+export default function Header({ headerState }) {
 
-    const detail = {name: "ram",age:34}
+
+    let userLoggedIn = headerState?.signin;
+    let userType = headerState?.userType;
+    const navigate = useNavigate()
+    const flag = userLoggedIn && (userType == "seller")
+    console.log("Flag : ",userType)
+
+
+    const detail = { name: "ram", age: 34 }
     return (
         <div className="w-full h-[12vmin] fixed  text-[#00bf8f] bg-gradient-to-r from-[#eb2d0cec] to-[#04d915ef] flex justify-between p-1">
 
@@ -13,31 +20,89 @@ export default function Header() {
                     src="./src/images/medical_logo.jpg" alt="img problem" />
             </div>
 
-            <div className=" flex gap-4 justify-center items-center text-white text-[20px]">
-                <ul className="flex gap-4">
-                    <li className="hover:text-red-500 cursor-pointer">
-                        <NavLink to="/"
-                            className={({ isActive }) => `${isActive ? 'text-blue-700' : ""} `}> Home</NavLink></li>
-                    <li className="hover:text-red-500 cursor-pointer">
-                        <NavLink
-                            to="/about"
-                            className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}>About</NavLink>
-                    </li>
-                    <li className="hover:text-red-500 cursor-pointer">
-                        <NavLink to="/contact/ram"
-                            className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}
-                        >Contact</NavLink>
+            <div className={` flex gap-4 justify-center items-center  text-white text-[20px]`}>
 
-                        {/* <button onClick={()=>navigate(`/contact/ram,sita,rita`)}>contact</button> */}
-                    </li>
-                   
-                </ul>
+                <div className={`mainview ${userLoggedIn ? 'hidden' : ''}  flex gap-4 justify-end items-center  text-white text-[20px]`}>
+                    <ul className="flex gap-4">
+                        <li className="hover:text-red-500 cursor-pointer">
+                            <NavLink to="/"
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""} `}> Home</NavLink></li>
+                        <li className="hover:text-red-500 cursor-pointer">
+                            <NavLink
+                                to="/about"
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}>About</NavLink>
+                        </li>
+                        <li className="hover:text-red-500 cursor-pointer">
+                            <NavLink to="/contact/ram"
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}
+                            >Contact</NavLink>
+                        </li>
 
-                <div className={`flex gap-2 ${userLoggedIn ? 'hidden' : ''}`}>
-                    <button onClick={() => navigate("/signin")} className=" hover:scale-90 rounded-xl p-2 text-xl bg-amber-500 pl-1 pr-1 bg-gradient-to-br from-[#f8391b] to-[#50d3e7] ">Sign in </button>
-                    <button onClick={() => navigate("/signout")} className="hover:scale-90 rounded-xl p-2 text-xl  pl-1 pr-1 bg-gradient-to-br from-[#50d3e7] to-[#f8391b]">Sign up</button>
+                    </ul>
+                    <div className={`flex gap-2 `}>
+                        <button onClick={() => navigate("/signin", { state: headerState })} className=" hover:scale-90 rounded-xl p-2 text-xl bg-amber-500 pl-1 pr-1 bg-gradient-to-br from-[#f8391b] to-[#50d3e7] ">Sign in </button>
+                        <button onClick={() => navigate("/signout", { state: headerState })} className="hover:scale-90 rounded-xl p-2 text-xl  pl-1 pr-1 bg-gradient-to-br from-[#50d3e7] to-[#f8391b]">Sign up</button>
+                    </div>
+                </div>
+
+                <div className={`seller flex gap-4 justify-end items-center text-white text-[20px] ${userLoggedIn ? "" : 'hidden'}`}>
+                    {/* <h2>company name</h2> */}
+
+                    <ul className="flex gap-4">
+                        <li className="hover:text-red-500 cursor-pointer">
+                            <NavLink
+                                to="/"
+                                state={headerState}
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""} `}> Home</NavLink></li>
+                        <li className="hover:text-red-500 cursor-pointer">
+                            <NavLink
+                                to='/about'
+                                state={headerState}
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}>Sell</NavLink>
+                        </li>
+                        <li className="hover:text-red-500 cursor-pointer">
+                            <NavLink
+                                to='/contact/ram'
+                                state={headerState}
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}>Warehouse</NavLink>
+                        </li>
+                        <li>
+
+                        </li>
+                    </ul>
+                    <img
+                        className="w-[90px] h-[70px] mix-blend-darken hover:scale-110 "
+                        src="./src/images/doctor_anime.jpg" alt="" />
+
                 </div>
             </div>
+
+            {/* <div className={`seller flex gap-4 justify-center items-center text-white text-[20px] ${userLoggedIn ? "" : 'hidden'}`}>
+                <div className={`seller flex gap-4 justify-center items-center text-white text-[20px] ${userLoggedIn ? "" : 'hidden'}`}>
+                    <h2>company name</h2>
+
+                    <ul className="flex gap-4">
+                        <li className="hover:text-red-500 cursor-pointer">
+                            <NavLink to="/"
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""} `}> Home</NavLink></li>
+                        <li className="hover:text-red-500 cursor-pointer">
+                            <NavLink
+                                to="/about"
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}>Sell</NavLink>
+                        </li>
+                        <li className="hover:text-red-500 cursor-pointer">
+                            <NavLink to="/contact/ram"
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}>Warehouse</NavLink>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div> */}
+
+            {/* <div className="patient ">
+
+            </div> */}
 
         </div>
     )

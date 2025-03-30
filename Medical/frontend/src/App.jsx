@@ -1,17 +1,26 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from './components/Header/Header'
-import {Outlet} from 'react-router-dom'
+import {Outlet, useLocation} from 'react-router-dom'
 
 import Footer from './components/Footer/Footer'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [headerState,setHeaderState] = useState({userType:"",signin:false})
+
+  const location = useLocation();
+  console.log("Location Data : ",location.state);
+  // setHeaderState(location.state);
+  // const headerState = {userType:" ",signin:false}
+
+  useEffect(()=>{
+    
+  },[])
 
   return (
     <>
       <header className='w-full h-[12vh] '>
-        <Header />
+        <Header headerState={location.state}/>
       </header>
       <main className='w-full h-fit'>
         <Outlet />

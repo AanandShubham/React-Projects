@@ -3,13 +3,13 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter,RouterProvider, useParams } from 'react-router-dom'
-import { Home,About,Contact,SignIn, SignOut } from './components/index.js'
+import { Home,About,Contact,SignIn, SignUp } from './components/index.js'
 const router = createBrowserRouter([
   {
     path:"/",
     element:<App />,
     children:[
-      {
+      { 
         path:"",
         element:<Home />
       },
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
   },
   {
     path:"/signout",
-    element:<SignOut />
+    element:<SignUp />
   }
 ]);
 

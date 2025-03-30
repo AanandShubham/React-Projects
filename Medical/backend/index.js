@@ -149,7 +149,7 @@ app.post("/register", async (req, res) => {        // to register
         console.log("| Message : ", error);
         console.log("--------------------------------------------\n")
 
-        res.json(error);
+        res.json({status:'err',...error});
     }
 
 

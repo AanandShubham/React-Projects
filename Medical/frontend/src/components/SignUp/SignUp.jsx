@@ -1,3 +1,4 @@
+import { name } from 'ejs';
 import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 
@@ -51,6 +52,13 @@ const SignOut = () => {
             })
             .then((res)=>res.json())
             .then((res)=>res)
+
+            if(await response.status == 'ok'){
+                let userType = response.userType;
+
+                navigate('/',{state:{usertype:userType,'signin':formData.signin}})
+
+            }
 
             console.log("Response From Db : ", await response);
             // console.log("Response From Db : ", await response.status);
@@ -163,7 +171,7 @@ const SignOut = () => {
                         <div className='w-full flex justify-center gap-4 text-2xl'>
                             <input className='pl-2 pr-2 pt-1 pb-1 border-1 rounded-2xl' type="submit" value="Register" />
                             <input 
-                            onClick={()=> navigate("/")}
+                            onClick={()=> navigate("/",{state:{usertype:"",'signin':false}})}
                             className='pl-2 pr-2 pt-1 pb-1 border-1 rounded-2xl' type="button" value="Cancel" />
                         </div>
                     </div>
