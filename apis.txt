@@ -1,1 +1,1 @@
-gitApi =  'https://api.github.com/users/hiteshchoudhary'
+gitApi =  'https://api.github.com/users/AanandShubham'

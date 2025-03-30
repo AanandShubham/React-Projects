@@ -8,7 +8,7 @@ const SignOut = () => {
 
     const handleUserType = (e) => {
         console.log(e.target.value)
-        if(e.target.value === 'Seller')
+        if(e.target.value === 'seller')
             setSeller(true)
         else
             setSeller(false)
@@ -104,21 +104,21 @@ const SignOut = () => {
                                 type="radio"
                                 name='gender'
                                 id="Male"
-                                value="Male"
+                                value="M"
                             />
                             <label htmlFor="">Male</label>
                             <input
                                 type="radio"
                                 name='gender'
                                 id="Female"
-                                value="Female"
+                                value="F"
                             />
                             <label htmlFor="">Female</label>
                             <input
                                 type="radio"
                                 name='gender'
                                 id="Other"
-                                value="Other"
+                                value="O"
                             />
                             <label htmlFor="">Others</label>
 
@@ -150,7 +150,7 @@ const SignOut = () => {
                                     onChange={handleUserType}
                                     className='border-1 rounded-2xl p-4' name="usertype" id="">
                                     <option value="Patient">Patient</option>
-                                    <option value="Seller">Seller</option>
+                                    <option value="seller">Seller</option>
                                 </select>
                             </div>
                         </div>
