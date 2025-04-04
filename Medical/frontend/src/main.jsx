@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter,RouterProvider, useParams } from 'react-router-dom'
-import { Home,About,Contact,SignIn, SignUp } from './components/index.js'
+import { Home,About,Contact,SignIn, SignUp, Warehouse, Sold, SellerHome, Diases } from './components/index.js'
 const router = createBrowserRouter([
   {
     path:"/",
@@ -24,8 +24,27 @@ const router = createBrowserRouter([
           // const {id} = useParams()
           console.log("message from routes");
           return "message from main"
-        }
-      }   
+        },
+        
+      },
+      {
+        path:"werehouse",
+        element:<Warehouse />,
+        children:[
+          {
+            path:"/werehouse/",
+            element:<SellerHome />
+          },
+          {
+            path:"/werehouse/diases/",
+            element:<Diases />
+          }
+        ]
+      } ,
+      {
+        path:'sold',
+        element:<Sold />
+      } 
     ],
   },
   {

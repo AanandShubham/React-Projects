@@ -54,9 +54,22 @@ const SignOut = () => {
             .then((res)=>res)
 
             if(await response.status == 'ok'){
-                let userType = response.userType;
 
-                navigate('/',{state:{usertype:userType,'signin':formData.signin}})
+                let stateData = {
+                    'usertype':userType,
+                    'username':username,
+                    'signin':formData.signin,
+                }
+                
+                if(stateData.usertype === 'seller') stateData['shopname'] = response.shopname;
+                navigate('/',{state:stateData});
+
+                // if(userType === 'seller'){
+                //     navigate('/',{state:{usertype:userType,'signin':formData.signin,'shopname':response.shopname}})
+                // }else{
+                //     navigate('/',{state:{usertype:userType,'signin':formData.signin}})
+                // }
+
 
             }
 
@@ -103,7 +116,6 @@ const SignOut = () => {
                                 <option value="pakistan">Pakistan</option>
                                 <option value="bangladesh">Bangal</option>
                                 <option value="srilanka">Srilanka</option>
-
                             </select>
                         </div>
                         <div className='w-full flex gap-6'>

@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom"
+
 export default function Header({ headerState }) {
 
+    // let userLoggedIn = headerState?.signin;
+    // let userType = headerState?.usertype;
 
-    let userLoggedIn = headerState?.signin;
-    let userType = headerState?.userType;
+    let userLoggedIn = true;
+    let userType = 'seller';
+    // let userType = 'patient'
     const navigate = useNavigate()
-    const flag = userLoggedIn && (userType == "seller")
-    console.log("Flag : ",userType)
+    // const flag = userLoggedIn && (userType == "seller")
+    // console.log("Flag : ",flag)
 
 
-    const detail = { name: "ram", age: 34 }
+    // const detail = { name: "ram", age: 34 }
     return (
         <div className="w-full h-[12vmin] fixed  text-[#00bf8f] bg-gradient-to-r from-[#eb2d0cec] to-[#04d915ef] flex justify-between p-1">
 
@@ -26,7 +30,7 @@ export default function Header({ headerState }) {
                     <ul className="flex gap-4">
                         <li className="hover:text-red-500 cursor-pointer">
                             <NavLink to="/"
-                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""} `}> Home</NavLink></li>
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""} `}>Home</NavLink></li>
                         <li className="hover:text-red-500 cursor-pointer">
                             <NavLink
                                 to="/about"
@@ -45,10 +49,11 @@ export default function Header({ headerState }) {
                     </div>
                 </div>
 
-                <div className={`seller flex gap-4 justify-end items-center text-white text-[20px] ${userLoggedIn ? "" : 'hidden'}`}>
-                    {/* <h2>company name</h2> */}
+                <div className={` w-full seller flex gap-[300px] not-lg:gap-[100px] items-center text-white text-[20px] ${(userLoggedIn &&( userType == 'seller')) ? "" : 'hidden'}`}>
+                    
+                    <h2>{headerState?.shopname || "Shop Name"}</h2>
 
-                    <ul className="flex gap-4">
+                    <ul className="flex gap-4 justify-center items-center">
                         <li className="hover:text-red-500 cursor-pointer">
                             <NavLink
                                 to="/"
@@ -56,24 +61,28 @@ export default function Header({ headerState }) {
                                 className={({ isActive }) => `${isActive ? 'text-blue-700' : ""} `}> Home</NavLink></li>
                         <li className="hover:text-red-500 cursor-pointer">
                             <NavLink
-                                to='/about'
+                                to='sold'
                                 state={headerState}
-                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}>Sell</NavLink>
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}>Sold</NavLink>
                         </li>
                         <li className="hover:text-red-500 cursor-pointer">
                             <NavLink
-                                to='/contact/ram'
+                                to='werehouse'
                                 state={headerState}
                                 className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}>Warehouse</NavLink>
                         </li>
                         <li>
-
+                        <img
+                        className="w-[90px] h-[50px] mix-blend-darken hover:scale-110 "
+                        src="./src/images/doctor_anime.jpg" alt="" />
                         </li>
                     </ul>
-                    <img
-                        className="w-[90px] h-[70px] mix-blend-darken hover:scale-110 "
-                        src="./src/images/doctor_anime.jpg" alt="" />
+                    
 
+                </div>
+
+                <div className={`patient ${userLoggedIn && userType == 'patient' ? "":"hidden"}`}>
+                    <h3>Patient Mode activated</h3>
                 </div>
             </div>
 

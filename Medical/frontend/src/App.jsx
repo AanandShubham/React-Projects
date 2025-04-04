@@ -13,9 +13,9 @@ function App() {
   // setHeaderState(location.state);
   // const headerState = {userType:" ",signin:false}
 
-  useEffect(()=>{
+  // useEffect(()=>{
     
-  },[])
+  // },[])
 
   return (
     <>

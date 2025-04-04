@@ -3,5 +3,8 @@ import About from "./About/About"
 import Contact from "./Contact/Contact"
 import SignIn from "./SignIn/SignIn"
 import SignUp from "./SignUp/SignUp"
-
-export {Home,About,Contact,SignIn,SignUp}
+import Warehouse from "./Seller/Warehouse"
+import Sold from "./Seller/Sold"
+import SellerHome from "./Seller/SellerHome"
+import Diases from "./Seller/Diases"
+export {Home,About,Contact,SignIn,SignUp,Warehouse,Sold,SellerHome,Diases}
