@@ -4,46 +4,6 @@ const app = express()
 
 import { connection } from './DBScripts/DbConnection.js';
 
-// console.log("connection : ",connection)
-// const table = await connection.execute("show tables");
-// console.log("Tables : ", table)
-
-// const response = await connection.execute("insert into Test values('Bharath','ram')")
-// console.log("response : ",await response[0].affectedRows)
-
-// console.log("Data : ", 
-//     await connection.execute
-//     ("insert into Test values('ram','lakshamn')"));
-
-// const table = await connection.execute("create table test2 ( name varchar(30) , age integer);",(err,row,fields)=>console.log("Error : ",err,"Row : ",row,"fields :",fields));
-// try {
-
-//     console.log("create Table Data : ",table);
-// } catch (error) {
-//     // console.log("error MESSAGE : ",error);
-// }
-
-// const dat = connection.execute("select * from Test", async(err,result)=>{
-//     if(err){
-//         console.log("error : ",err);
-//     }
-//     else{
-//         console.log("Data : ",result[0]);
-//         return result[0]
-//     }
-// })
-
-// console.log("Data ",dat);
-// Handle Error 
-// try {
-//     const data = await connection.execute("select * from Test");
-
-// console.log("DAta  : ",data[0]);
-// } catch (error) {
-//     console.log("-----------------------------------------------")
-//     console.log("ERROR Code : ",error.code,"\nerror No : ",error.errno,"\nError Status : ",error.sqlState,"\nSql : ",error.sql)
-// }
-
 
 const corsOptions = {
     origin: "http://localhost:5173",
@@ -60,11 +20,24 @@ app.get("/", (req, res) => {                // to send query data
     res.send("test is working")
 })
 
+app.post('/signin', async (req, res) => {
+    try {
+        console.log("Request Got ")
+        const { username, password } = req.body
+        const response = await connection.query('select userType from Customer where username = ? and password = ?', [username, password]);
+        console.log("response Data : ", response[0][0].userType)
+        console.log("response Data : ", response[0].affectedRows)
+
+
+    } catch (error) {
+
+    }
+})
+
+
 app.post("/register", async (req, res) => {        // to register
 
     // reading requist form data    
-
-    // console.log(req.body);
 
     const { fname, lname, gender, age,
         nationality, username, password, email,
@@ -75,10 +48,10 @@ app.post("/register", async (req, res) => {        // to register
 
     try {
         const insertUserResponse = await connection.execute
-            (`insert into Customer(username,password,fname,lname,gender,age,phone,email,emergencykey,address,nationality,isSeller) values(
-            '${username}','${password}','${fname}','${lname}','${gender}','${age}','${phone}',
-            '${email}','${emergencykey}','${address}','${nationality}','${usertype == 'seller' ? 1 : 0}'
-            )`);
+            (`insert into Customer(username,password,fname,lname,gender,age,phone,email,emergencykey,address,nationality,userType) values(
+                '${username}','${password}','${fname}','${lname}','${gender}','${age}','${phone}',
+                '${email}','${emergencykey}','${address}','${nationality}','${usertype}'
+                )`);
 
         if (insertUserResponse[0].affectedRows > 0) {
 
@@ -87,57 +60,60 @@ app.post("/register", async (req, res) => {        // to register
             if (usertype == 'seller') {
 
                 let { shopname, gstno } = req.body;
+
                 shopname = shopname.split(' ').join('_');
+
                 // concat spaces 
                 const createShopsTable = `CREATE TABLE ${username + '_' + shopname} 
-                        (
-                            mid varchar(30) primary key,
-                            mname varchar(40) not null,
-                            mfg Date not null,
-                            expr Date not null,
-                            rate Float not null,
-                            qty integer not null,
-                            did varchar(30) not null,
-                            descr varchar(50) not null,
-                            constraint fkMedicin FOREIGN KEY(did) REFERENCES Disease(did)
-                        );`;
+                            (
+                                mid varchar(30) primary key,
+                                mname varchar(40) not null,
+                                mfg Date not null,
+                                expr Date not null,
+                                rate Float not null,
+                                qty integer not null,
+                                did varchar(30) not null,
+                                descr varchar(50) not null,
+                                constraint fkMedicin FOREIGN KEY(did) REFERENCES Disease(did)
+                            );`;
 
                 const insertToShop = `insert into Shop values(
-                    '${ username + '_' + age }',
-                    '${ username + '_' + shopname }',
-                    '${ gstno }','${ username }'
-                )`;
+                        '${username + '_' + age}',
+                        '${username + '_' + shopname}',
+                        '${gstno}',
+                        '${username}'
+                    )`;
 
 
-                const createSellsTable = `CREATE TABLE ${username + '_' +shopname+'_Sales'}
-                     (
-                        mid varchar(30) not null,
-                        qty Integer not null,
-                        rate Float not null,
-                        pdate Date not null,
-                        uid varchar(30) not null,
-                        constraint fkMid FOREIGN KEY(mid) REFERENCES ${username + '_' + shopname}(mid),
-                        constraint fkSells FOREIGN KEY(uid) REFERENCES Customer(username),
-                        PRIMARY KEY pkSells(uid, mid, pdate)
-                     ); `
+                const createSellsTable = `CREATE TABLE ${username + '_' + shopname + '_Sales'}
+                        (
+                            mid varchar(30) not null,
+                            qty Integer not null,
+                            rate Float not null,
+                            pdate Date not null,
+                            uid varchar(30) not null,
+                            constraint fkMid FOREIGN KEY(mid) REFERENCES ${username + '_' + shopname}(mid),
+                            constraint fkSells FOREIGN KEY(uid) REFERENCES Customer(username),
+                            PRIMARY KEY pkSells(uid, mid, pdate)
+                        ); `
 
-    // Creating Shops Table            
+                // Creating Shops Table            
                 const shopResponse = await connection.execute(createShopsTable);
-    // Inserting Shop name to Shops Table
+                // Inserting Shop name to Shops Table
                 const insertToShopResponse = await connection.execute(insertToShop);
 
                 if (insertToShopResponse[0].affectedRows > 0) {
 
                     await connection.execute(createSellsTable);
 
-// sending response when user is seller and successfully created and inserted it's details and requirements
+                    // sending response when user is seller and successfully created and inserted it's details and requirements 
 
-                    res.json({ status: 'ok', userType: 'seller', message: 'seller inserted and its shop and sells table created' })
+                    res.json({ status: 'ok', userType: 'seller', shopname: shopname, shopid: username + age, message: 'seller inserted and its shop and sells table created' })
                 }
 
-            }else {
-// sending response when user is patient and successfully inserted the details to table
-                res.json({status:'ok',userType:'patient',message:'patient details inserted successfully'})
+            } else {
+                // sending response when user is patient and successfully inserted the details to table
+                res.json({ status: 'ok', userType: 'patient', message: 'patient details inserted successfully' })
             }
         }
 
@@ -149,7 +125,7 @@ app.post("/register", async (req, res) => {        // to register
         console.log("| Message : ", error);
         console.log("--------------------------------------------\n")
 
-        res.json({status:'err',...error});
+        res.json({ status: 'err', ...error });
     }
 
 
