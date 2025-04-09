@@ -56,12 +56,15 @@ const SignOut = () => {
             if(await response.status == 'ok'){
 
                 let stateData = {
-                    'usertype':userType,
-                    'username':username,
+                    'usertype':formData.usertype,
+                    'username':formData.username,
                     'signin':formData.signin,
                 }
                 
-                if(stateData.usertype === 'seller') stateData['shopname'] = response.shopname;
+                if(stateData.usertype === 'seller') {
+                    stateData['shopname'] = response.shopname;
+                    stateData['shopid'] = response.shopid;
+                }
                 navigate('/',{state:stateData});
 
                 // if(userType === 'seller'){

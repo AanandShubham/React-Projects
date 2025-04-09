@@ -1,32 +1,61 @@
-import React, { useRef, useState } from 'react'
-import { Navigate, Outlet, useNavigate } from 'react-router-dom'
+import React, { useEffect, useRef, useState } from 'react'
+import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 export default function Warehouse() {
 
+
+    const location = useLocation();
+
+    console.log("Warehouse Data  : ", location.state)
+
     const diasesInputRef = useRef();
 
-    const handleAddDiasesBtnClick = (e) => {
-        console.log(diasesInputRef.current.value)
-        
-        setNames([...names,diasesInputRef.current.value])
-        setShowDialog(false)
+    const handleAddDiasesBtnClick = async (e) => {
 
         // write save database codes here 
 
-        fetch('http://localhost:3000/adddiases',{
-            method:"POST",
-            headers:{
-                'Content-Type':"application/json"
-            },
-            body:{
+        const formData = {
+            username: location.state.username,
+            shopid: location.state.shopid,
+            diases: diasesInputRef.current.value
+        }
 
-            }
+        const response = await fetch('http://localhost:3000/adddiases', {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify(formData)
         })
+        .then((res) => res.json())
+
+        // do handle response with care 
+        // if (await response.status === 'inserted') {
+        //     const diases = await response.disease;
+        //     setDiases(diases)
+        // }
+
+        console.log("Response : ", await response);
+        diasesInputRef.current.value = ""
+        setShowDialog(false)
     }
 
     const [showDialog, setShowDialog] = useState(false)
-    let [names, setNames] = useState(['cancer', 'fever', 'sugar', 'bone'])
-    
+
+    useEffect(async()=>{
+        const diasesResponse =await fetch(`http://localhost:3000/getDiases/${location.state.shopid}`)
+        .then((res)=>res.json())
+        if(await diasesResponse.status === 'ok'){
+            const diases = await diasesResponse.disease;
+            setDiases(diases)
+        }
+    },[handleAddDiasesBtnClick])
+        // write code to get disease at every time 
+
+    let [diases, setDiases] = useState([
+        { did: 23, dname: 'fever', sid: '3w4d' }
+    ])
+
     const navigate = useNavigate()
 
     const handleClick = (e) => {
@@ -35,7 +64,7 @@ export default function Warehouse() {
             'diases': e.target.name,
             'shopname': "medx"
         }
-        navigate("/werehouse/diases/", { state: data })
+        navigate("/werehouse/diases/", { state: { ...location.state, diases: e.target.value } })
     }
 
     return (
@@ -55,9 +84,9 @@ export default function Warehouse() {
                         <ul className=' w-full text-xl p-2 flex flex-col gap-6'>
 
                             {
-                                names.map(
-                                    (items) => <li key={items} className='w-full text-center p-2 bg-slate-400 rounded-2xl' >
-                                        <button onClick={handleClick} name={items}>{items}</button>
+                                diases.map(
+                                    (items) => <li key={items.did} className='w-full text-center p-2 bg-slate-400 rounded-2xl' >
+                                        <button onClick={handleClick} value={items.dname} name={items.did}>{items.dname}</button>
                                     </li>
                                 )
                             }

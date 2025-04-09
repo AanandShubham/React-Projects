@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom"
 export default function Diases(){
         // const name = name;
         const location = useLocation();
-        console.log("Header Data : ",location.state)
+        console.log("Diases Header Data  : ",location.state)
         console.log("Header Page")
     return (
         <div>

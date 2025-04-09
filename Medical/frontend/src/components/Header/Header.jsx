@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom"
 
 export default function Header({ headerState }) {
+   
 
-    // let userLoggedIn = headerState?.signin;
-    // let userType = headerState?.usertype;
+    let userLoggedIn = headerState?.signin;
+    let userType = headerState?.usertype;
 
-    let userLoggedIn = true;
-    let userType = 'seller';
+    // let userLoggedIn = true;
+    // let userType = 'seller';
     // let userType = 'patient'
     const navigate = useNavigate()
     // const flag = userLoggedIn && (userType == "seller")
