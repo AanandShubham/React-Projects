@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom"
 
 export default function Header({ headerState }) {
-   
+
 
     let userLoggedIn = headerState?.signin;
     let userType = headerState?.usertype;
@@ -15,7 +15,6 @@ export default function Header({ headerState }) {
     // console.log("Flag : ",flag)
 
 
-    // const detail = { name: "ram", age: 34 }
     return (
         <div className="w-full h-[12vmin] fixed  text-[#00bf8f] bg-gradient-to-r from-[#eb2d0cec] to-[#04d915ef] flex justify-between p-1">
 
@@ -50,8 +49,8 @@ export default function Header({ headerState }) {
                     </div>
                 </div>
 
-                <div className={` w-full seller flex gap-[300px] not-lg:gap-[100px] items-center text-white text-[20px] ${(userLoggedIn &&( userType == 'seller')) ? "" : 'hidden'}`}>
-                    
+                <div className={` w-full seller flex gap-[300px] not-lg:gap-[100px] items-center text-white text-[20px] ${(userLoggedIn && (userType == 'seller')) ? "" : 'hidden'}`}>
+
                     <h2>{headerState?.shopname || "Shop Name"}</h2>
 
                     <ul className="flex gap-4 justify-center items-center">
@@ -73,16 +72,16 @@ export default function Header({ headerState }) {
                                 className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}>Warehouse</NavLink>
                         </li>
                         <li>
-                        <img
-                        className="w-[90px] h-[50px] mix-blend-darken hover:scale-110 "
-                        src="./src/images/doctor_anime.jpg" alt="" />
+                            <img
+                                className="w-[90px] h-[50px] mix-blend-darken hover:scale-110 "
+                                src="./src/images/doctor_anime.jpg" alt="" />
                         </li>
                     </ul>
-                    
+
 
                 </div>
 
-                <div className={`patient ${userLoggedIn && userType == 'patient' ? "":"hidden"}`}>
+                <div className={`patient ${userLoggedIn && userType == 'patient' ? "" : "hidden"}`}>
                     <h3>Patient Mode activated</h3>
                 </div>
             </div>
