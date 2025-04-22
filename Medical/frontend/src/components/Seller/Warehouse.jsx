@@ -29,8 +29,8 @@ export default function Warehouse() {
         })
             .then((res) => res.json())
             .then((res) => {
-                if(res.status == 'inserted')
-                    loadDiases() ;
+                if (res.status == 'inserted')
+                    loadDiases();
                 return res;
             })
 
@@ -57,7 +57,7 @@ export default function Warehouse() {
 
     useEffect(() => {
         loadDiases();
-    },[])
+    }, [])
 
     let [diases, setDiases] = useState([
         { did: 23, dname: 'fever', sid: '3w4d' }
@@ -76,7 +76,8 @@ export default function Warehouse() {
             {/* <h1>Werehouse</h1> */}
             <div className='w-[20vw] p-4  flex flex-col gap-8 rounded-xl bg-slate-500'>
                 <div className={`always w-full relative `}>
-                    <button onClick={() => setShowDialog(true)} className='w-[50px] h-[50px] absolute top-[73vh] left-[14vw] ' >
+                    <button onClick={() => setShowDialog(true)}
+                        className='w-[50px] h-[50px] absolute top-[73vh] left-[14vw] ' >
                         <img src="./src/images/add_btn.png" alt="" />
                     </button>
 
