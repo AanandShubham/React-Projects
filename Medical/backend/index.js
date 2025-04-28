@@ -63,10 +63,11 @@ app.post('/getMedicines', async (req, res) => {
 
         const medicine = await connection.execute(`select * from ${req.body.shopname} where did = ${req.body.did}`)
 
-        res.json({ status: 'ok', medicine: medicine });
-
-        // res.json({status:'empty'})
-        console.log(medicine[0].affectedRows)
+        if (medicine[0].length > 0)
+            res.json({ status: 'ok', medicine: medicine });
+        else
+            res.json({ status: 'empty' })
+        // console.log(medicine[0].affectedRows) 
     } catch (error) {
         console.log("Error in getMedicines : ", error)
         res.json({ status: 'error', ...error })
@@ -86,6 +87,21 @@ app.get('/getDiases/:shopid', async (req, res) => {
     }
     catch (error) {
         res.json({ status: 'failed', error: { ...error } })
+    }
+})
+
+app.get('/getAllDiases', async (req, res) => {
+
+    try {
+        const disease = await connection.execute('select * from Disease')
+
+        if (disease[0].length > 0)
+            res.json({status:'ok',disease:disease[0]})
+        else
+            res.json({status:'empty'})
+    } catch (error) {
+        console.log("Error in GetAll Disease : ------------\n",error);
+        res.json({status:'error',...error})
     }
 })
 

@@ -81,9 +81,48 @@ export default function Header({ headerState }) {
 
                 </div>
 
-                <div className={`patient ${userLoggedIn && userType == 'patient' ? "" : "hidden"}`}>
-                    <h3>Patient Mode activated</h3>
+                <div className={` w-full seller flex gap-[300px] not-lg:gap-[100px] items-center text-white text-[20px]  ${userLoggedIn && userType == 'patient' ? "" : "hidden"}`}>
+
+                    {/* <h2>{headerState?.shopname || "Shop Name"}</h2> */}
+
+                    <ul className="flex gap-4 justify-center items-center">
+                        <li className="hover:text-red-500 cursor-pointer">
+                            <NavLink
+                                to="/"
+                                state={headerState}
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""} `}> Home</NavLink>
+                        </li>
+                        <li className="hover:text-red-500 cursor-pointer">
+                            <NavLink
+                                to='wishlist'
+                                state={headerState}
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}>Wishlist</NavLink>
+                        </li>
+                        <li className="hover:text-red-500 cursor-pointer">
+                            <NavLink
+                                to='cart'
+                                state={headerState}
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}>Cart</NavLink>
+                        </li>
+                        <li className="hover:text-red-500 cursor-pointer">
+                            <NavLink
+                                to='medicines'
+                                state={headerState}
+                                className={({ isActive }) => `${isActive ? 'text-blue-700' : ""}`}>Medicines</NavLink>
+                        </li>
+                        <li>
+                            <img
+                                className="w-[90px] h-[50px] mix-blend-darken hover:scale-110 "
+                                src="./src/images/doctor_anime.jpg" alt="" />
+                        </li>
+                    </ul>
+
+
                 </div>
+
+
+
+
             </div>
 
             {/* <div className={`seller flex gap-4 justify-center items-center text-white text-[20px] ${userLoggedIn ? "" : 'hidden'}`}>

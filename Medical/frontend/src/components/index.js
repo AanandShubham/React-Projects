@@ -7,4 +7,7 @@ import Warehouse from "./Seller/Warehouse"
 import Sold from "./Seller/Sold"
 import SellerHome from "./Seller/SellerHome"
 import Diases from "./Seller/Diases"
-export {Home,About,Contact,SignIn,SignUp,Warehouse,Sold,SellerHome,Diases}
+import Wishlist from "./User/Wishlist"
+import Cart from "./User/Cart"
+import Medicines from "./User/Medicines"
+export {Home,About,Contact,SignIn,SignUp,Warehouse,Sold,SellerHome,Diases,Wishlist,Cart,Medicines}

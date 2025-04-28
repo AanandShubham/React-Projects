@@ -172,7 +172,7 @@ const SignOut = () => {
                                 <select
                                     onChange={handleUserType}
                                     className='border-1 rounded-2xl p-4' name="usertype" id="">
-                                    <option value="Patient">Patient</option>
+                                    <option value="patient">Patient</option>
                                     <option value="seller">Seller</option>
                                 </select>
                             </div>
