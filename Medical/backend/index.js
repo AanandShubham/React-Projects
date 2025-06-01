@@ -1,6 +1,8 @@
 import express, { response } from 'express';
 import cors from 'cors'
+import dotenv from 'dotenv'
 const app = express()
+dotenv.config({})
 
 import { connection } from './DBScripts/DbConnection.js';
 
@@ -90,7 +92,7 @@ app.get('/getDiases/:shopid', async (req, res) => {
     }
 })
 
-app.get('/getAllDiases', async (req, res) => {
+app.get('/getalldiases', async (req, res) => {
 
     try {
         const disease = await connection.execute('select * from Disease')
@@ -212,7 +214,7 @@ app.post("/register", async (req, res) => {        // to register
                                         '${username + '_' + shopname}',
                                         '${gstno}',
                                         '${username}'
-                                    )`;
+                                    );`;
 
 
                 const createSellsTable = `CREATE TABLE ${username + '_' + shopname + '_Sales'}
@@ -226,7 +228,7 @@ app.post("/register", async (req, res) => {        // to register
                                             FOREIGN KEY(mid) REFERENCES ${username + '_' + shopname}(mid),
                                             FOREIGN KEY(uid) REFERENCES Customer(username),
                                             PRIMARY KEY (uid, mid, pdate)
-                                        ); `
+                                        );`
 
                 // Creating Shops Table            
                 const shopResponse = await connection.execute(createShopsTable);
@@ -273,9 +275,9 @@ const nresponse = await connection.query('select userType from Customer where us
 console.log("response Data : ", nresponse[0][0])
 console.log("response Data : ", nresponse[0].length)
 
+const PORT = process.env.PORT
 
-
-app.listen(3000, (err) => {
+app.listen(PORT, (err) => {
     console.log("Server is running ......")
     console.log("Listening at Link ......")
     console.log('"http://localhost:3000/"')

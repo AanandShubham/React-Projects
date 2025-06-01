@@ -10,4 +10,11 @@ import Diases from "./Seller/Diases"
 import Wishlist from "./User/Wishlist"
 import Cart from "./User/Cart"
 import Medicines from "./User/Medicines"
-export {Home,About,Contact,SignIn,SignUp,Warehouse,Sold,SellerHome,Diases,Wishlist,Cart,Medicines}
+import UserDiases from "./User/UserDiases"
+import UserHome from "./User/UserHome"
+export {
+    Home, About, Contact, SignIn,
+    SignUp, Warehouse, Sold, SellerHome,
+    Diases, Wishlist, Cart, Medicines,
+    UserDiases, UserHome
+}

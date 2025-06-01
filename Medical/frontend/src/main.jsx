@@ -3,7 +3,13 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider, useParams } from 'react-router-dom'
-import { Home, About, Contact, SignIn, SignUp, Warehouse, Sold, SellerHome, Diases, Wishlist, Cart, Medicines } from './components/index.js'
+import {
+  Home, About, Contact, SignIn, SignUp,
+  Warehouse, Sold, SellerHome, Diases, Wishlist,
+  Cart, Medicines,
+  UserHome,
+  UserDiases
+} from './components/index.js'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -46,16 +52,26 @@ const router = createBrowserRouter([
         element: <Sold />
       },
       {
-        path:'wishlist',
-        element:<Wishlist />
+        path: 'wishlist',
+        element: <Wishlist />
       },
       {
-        path:'cart',
-        element:<Cart />
+        path: 'cart',
+        element: <Cart />
       },
       {
-        path:'medicines',
-        element:<Medicines />
+        path: 'medicines',
+        element: <Medicines />,
+        children:[
+          {
+            path:'/medicines/',
+            element:<UserHome/>
+          },
+          {
+            path:'/medicines/diases/',
+            element:<UserDiases/>
+          }
+        ]
       }
     ],
   },
