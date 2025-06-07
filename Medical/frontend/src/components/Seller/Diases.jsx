@@ -57,11 +57,15 @@ export default function Diases() {
         })
             .then((res) => res.json())
             .then((res) => {
-                if (res.status == 'ok'){
+                if (res.status === 'ok'){
                     setMedicin(res.medicine[0]);
                     console.log("Medicines : ",res)
+                    console.log(res.medicine[0][0].mfg.split('T')[0])
                 } 
-                console.log(res.medicine[0][0].mfg.split('T')[0])
+                else{
+                    console.log("Medicine is Empty : ",res);
+                    setMedicin([])
+                }
                 
 
                 return res;

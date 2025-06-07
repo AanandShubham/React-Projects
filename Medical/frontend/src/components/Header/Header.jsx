@@ -4,15 +4,23 @@ import { NavLink, useNavigate } from "react-router-dom"
 export default function Header({ headerState }) {
 
 
-    let userLoggedIn = headerState?.signin;
+    // let userLoggedIn = headerState?.signin;
     let userType = headerState?.usertype;
 
-    // let userLoggedIn = true;
+    let [userLoggedIn,setUserLoggedIn] = useState(headerState?.signin);
+
+
+    // let userLoggedIn = false;
     // let userType = 'seller';
     // let userType = 'patient'
     const navigate = useNavigate()
     // const flag = userLoggedIn && (userType == "seller")
     // console.log("Flag : ",flag)
+
+    const handleLogout = (e)=>{
+        setUserLoggedIn(false)
+        console.log("User data is set to false")
+    }
 
 
     return (
@@ -73,6 +81,7 @@ export default function Header({ headerState }) {
                         </li>
                         <li>
                             <img
+                                onClick={handleLogout}
                                 className="w-[90px] h-[50px] mix-blend-darken hover:scale-110 "
                                 src="./src/images/doctor_anime.jpg" alt="" />
                         </li>
@@ -112,6 +121,7 @@ export default function Header({ headerState }) {
                         </li>
                         <li>
                             <img
+                                onClick={handleLogout}
                                 className="w-[90px] h-[50px] mix-blend-darken hover:scale-110 "
                                 src="./src/images/doctor_anime.jpg" alt="" />
                         </li>
